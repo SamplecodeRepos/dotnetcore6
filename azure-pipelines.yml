@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   solution: '**/*.sln'
@@ -16,6 +16,11 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 
 - task: NuGetCommand@2
   inputs:
